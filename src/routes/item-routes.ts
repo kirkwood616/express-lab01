@@ -95,7 +95,6 @@ itemRoutes.get("/", function (req, res) {
 });
 
 ///// ORIGINAL //////
-
 // itemRoutes.get("/", function (req, res) {
 //   let maxPrice: number = parseInt(req.query.maxPrice as string);
 //   let prefix: string = req.query.prefix as string;
