@@ -68,9 +68,7 @@ itemRoutes.get("/", function (req, res) {
 			item.product.toLowerCase().startsWith(prefix.toLowerCase())
 		);
 		if (maxPrice) {
-			let prefixMax = filteredPrefix.filter(
-				(item) => item.price <= maxPrice
-			);
+			let prefixMax = filteredPrefix.filter((item) => item.price <= maxPrice);
 			prefixMax.forEach((i) => objectArray.push(i));
 			//   objectArray.push(prefixMax); //PUSHES AN ARRAY INTO AN ARRAY CREATING SUB-ARRAYS IN ARRAY
 		} else {
@@ -79,7 +77,7 @@ itemRoutes.get("/", function (req, res) {
 	} else if (maxPrice) {
 		let filteredMax = items.filter((item) => item.price <= maxPrice);
 		// filteredMax.forEach((i) => objectArray.push(i)); //ERROR
-		objectArray.push(filteredMax);
+		objectArray.push(filteredMax); // PUSHING SUB-ARRAY... NEED TO USE ABOVE LINE & RESOLVE ERROR
 	} else {
 		items.forEach((i) => objectArray.push(i));
 	}
@@ -89,8 +87,10 @@ itemRoutes.get("/", function (req, res) {
 			(item, index) => index <= pageSize - 1
 		);
 		res.json(filteredPage);
+		// res.render("cart-items", { filteredPage });
 	} else {
 		res.json(objectArray);
+		// res.render("cart-items", { objectArray });
 	}
 });
 
@@ -149,7 +149,7 @@ itemRoutes.delete("/:id", function (req, res) {
 	let itemIndex = items.findIndex((item) => item.id === inputId);
 	items.splice(itemIndex, 1);
 	res.status(204);
-	res.json("");
+	res.json(`Item ID# ${itemIndex} Was Deleted.`);
 });
 
 export default itemRoutes;
