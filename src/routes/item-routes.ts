@@ -60,7 +60,7 @@ itemRoutes.get("/", function (req, res) {
 	let maxPrice: number = parseInt(req.query.maxPrice as string);
 	let prefix: string = req.query.prefix as string;
 	let pageSize: number = parseInt(req.query.pageSize as string);
-	let objectArray = [];
+	let objectArray: Item[] = [];
 	//   let input = req.query; // RETURNS OBJECT OF QUERY PARAMS
 
 	if (prefix) {
@@ -76,8 +76,8 @@ itemRoutes.get("/", function (req, res) {
 		}
 	} else if (maxPrice) {
 		let filteredMax = items.filter((item) => item.price <= maxPrice);
-		// filteredMax.forEach((i) => objectArray.push(i)); //ERROR
-		objectArray.push(filteredMax); // PUSHING SUB-ARRAY... NEED TO USE ABOVE LINE & RESOLVE ERROR
+		filteredMax.forEach((i) => objectArray.push(i));
+		// objectArray.push(filteredMax); // PUSHING SUB-ARRAY... NEED TO USE ABOVE LINE & RESOLVE ERROR
 	} else {
 		items.forEach((i) => objectArray.push(i));
 	}
